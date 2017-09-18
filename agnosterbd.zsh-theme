@@ -126,20 +126,20 @@ prompt_battery() {
     b=$(battery_pct_remaining)
     if [[ $(ioreg -rc AppleSmartBattery | grep -c '^.*"ExternalConnected"\ =\ No') -eq 1 ]] ; then
       if [ $b -gt 80 ] ; then
-	HEART="▐▐▐▐▐ "
-	prompt_segment green white
+        HEART="▐▐▐▐▐ "
+        prompt_segment green white
       elif [ $b -gt 60 ] ; then
-	HEART="▐▐▐▐· "
-	prompt_segment green white
+        HEART="▐▐▐▐· "
+        prompt_segment green white
       elif [ $b -gt 40 ] ; then
-	HEART="▐▐▐·· "
-	prompt_segment green white
+        HEART="▐▐▐·· "
+        prompt_segment green white
       elif [ $b -gt 20 ] ; then
-	HEART="▐▐··· "
-	prompt_segment yellow white
+        HEART="▐▐··· "
+        prompt_segment yellow white
       else
         HEART="▐···· "
-	prompt_segment red white
+        prompt_segment red white
       fi
       echo -n "%{$fg_bold[white]%}$HEART$(battery_pct_remaining)%%%{$fg_no_bold[white]%}"
     fi
@@ -173,11 +173,20 @@ prompt_battery() {
 
     b=$(battery_pct_remaining)
     if [[ $(acpi 2&>/dev/null | grep -c '^Battery.*Discharging') -gt 0 ]] ; then
-      if [ $b -gt 40 ] ; then
+      if [ $b -gt 80 ] ; then
+        HEART="▐▐▐▐▐ "
+        prompt_segment green white
+      elif [ $b -gt 60 ] ; then
+        HEART="▐▐▐▐· "
+        prompt_segment green white
+      elif [ $b -gt 40 ] ; then
+        HEART="▐▐▐·· "
         prompt_segment green white
       elif [ $b -gt 20 ] ; then
+        HEART="▐▐··· "
         prompt_segment yellow white
       else
+        HEART="▐···· "
         prompt_segment red white
       fi
       echo -n "%{$fg_bold[white]%}$HEART$(battery_pct_remaining)%%%{$fg_no_bold[white]%}"
